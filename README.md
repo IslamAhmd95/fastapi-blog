@@ -118,39 +118,45 @@ fastapi-blog/
 
 ## 🚀 Getting Started
 
-### 1️⃣ **Clone the repository**
+### 1. **Clone the repository**
 
 ```
 git clone https://github.com/IslamAhmd95/fastapi-blog
 cd fastapi-blog/
 ```
 
-### 2️⃣ **Create and activate a virtual environment**
+### 2. **Create and activate a virtual environment**
 
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3️⃣ **Install dependencies**
+### 3. **Install dependencies**
 
 ```
 pip install -r requirements.txt
 ```
 
-### 4️⃣ **Apply migrations**
+### 4. **Setup environment variables and secret**
+
+```
+cp .env.example .env
+```
+
+### 5. **Apply migrations**
 
 ```
 alembic upgrade head
 ```
 
-### 5️⃣ **Seed the database**
+### 6. **Seed the database**
 
 ```
 python -m scripts.seed
 ```
 
-### 6️⃣ **Run the development server**
+### 7. **Run the development server**
 
 ```
 uvicorn main:app --reload
