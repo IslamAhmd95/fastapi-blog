@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import Depends, HTTPException, status  # pyright: ignore[reportMissingImports]
+from fastapi import Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -16,12 +16,14 @@ def check_email_exists(email: str, db: Session, user: Optional[User] = None):
 
     return db.execute(query).scalar()
 
+
 def check_username_exists(username: str, db: Session, user: Optional[User] = None):
     query = select(User).where(User.username == username)
     if user:
         query = query.where(User.id != user.id)
 
     return db.execute(query).scalar()
+
 
 def admin_required(current_user: User = Depends(get_current_user)):
     if current_user.role != RoleEnum.ADMIN:

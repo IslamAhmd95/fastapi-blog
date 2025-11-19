@@ -1,72 +1,159 @@
-# 📝 SQLAlchemy Blog
+# 📝 FastAPI Blog
 
 ## 📘 Overview
-**SQLAlchemy Blog** is a backend-only blog application built with **Python** and **SQLAlchemy ORM**.  
-It demonstrates how to model complex relationships, perform CRUD operations, and handle business logic purely with SQLAlchemy — no web framework involved.
 
-This project mimics real-world backend logic for a blogging system with entities like **Users, Posts, Comments, Tags, Profiles, and Likes**, all connected through relational models.
+**FastAPI Blog** is a fully featured backend-only blogging system built using **FastAPI**, **SQLAlchemy ORM**, and **Pydantic**. The project follows a clean and scalable architecture using the **Repository Pattern**, **eager loading for optimized queries**, and a well-structured module layout suitable for real-world production applications.
 
----
-
-## ⚙️ Features
-- **Users Management** — Create, update, delete users and their profiles.  
-- **Posts CRUD** — Users can create, edit, view, and delete posts.  
-- **Comments CRUD** — Add or update comments under posts.  
-- **Tags Management** — Tag posts and fetch posts by tag.  
-- **Likes System** — Like or unlike both posts and comments.  
-- **Follow System** — Users can follow/unfollow each other.  
-- **Relationships** —  
-  - One-to-many: user → posts, post → comments  
-  - Many-to-many: users ↔ followers, posts ↔ tags, users ↔ likes  
+This backend handles user authentication, posts, comments, likes, tags, profiles, and a follow system between users. It demonstrates how to implement complete business logic in a clean and maintainable way.
 
 ---
 
-## 🧩 Tech Stack
-| Tool | Purpose |
-|------|----------|
-| **Python 3.x** | Programming language |
-| **SQLAlchemy ORM** | ORM and database management |
-| **Alembic** | For database migrations |
-| *(Future step)* **Pydantic** | Planned next layer for validating requests |
-| *(Future step)* **FastAPI** | Planned next layer for API endpoints |
+## 🌟 Key Features
+
+### 👤 **User Management**
+
+* Create, update, delete users
+* User profiles
+* Follow/unfollow system
+* Secure password hashing
+
+### 📝 **Posts & Comments**
+
+* Full CRUD for posts
+* Comment system with CRUD
+* Like/unlike both posts and comments
+* Relation-based querying
+
+### 🏷️ **Tags System**
+
+* Add tags to posts
+* List posts by tag
+* Many-to-many relationships
+
+### ❤️ **Likes System**
+
+* Users can like/unlike posts and comments
+* Prevent multiple likes from same user
+
+### 🔐 **Authentication**
+
+* JWT-based authentication
+* OAuth2 password flow
+* Access token creation & validation
+
+### ⚡ **Performance Techniques**
+
+* **Eager loading** for efficient queries (selectinload/joinedload)
+* Clean repository abstraction for data access
+
+### 🏗️ **Architecture Highlights**
+
+* Repository pattern
+* Models and schemas separation
+* Modular API routes
+* Centralized database session handling
 
 ---
 
+## 📂 Project Structure
 
-## 🚀 How to Run
+```
+fastapi-blog/
+│
+├── app/
+│   ├── api/                # All API route files
+│   │   ├── auth.py
+│   │   ├── users.py
+│   │   ├── posts.py
+│   │   ├── comments.py
+│   │   └── tags.py
+│   │
+│   ├── core/               # Core system utilities & configs
+│   │   ├── config.py
+│   │   ├── database.py
+│   │   ├── enums.py
+│   │   ├── events.py
+│   │   ├── hashing.py
+│   │   ├── helpers.py
+│   │   ├── oauth2.py
+│   │   └── token.py
+│   │
+│   ├── models/             # SQLAlchemy ORM models
+│   │   ├── users.py
+│   │   ├── profile.py
+│   │   ├── posts.py
+│   │   ├── comments.py
+│   │   ├── tags.py
+│   │   ├── users_followers.py
+│   │   ├── post_tags.py
+│   │   ├── post_likes.py
+│   │   └── comment_likes.py
+│   │
+│   ├── repositories/       # Repository pattern implementation
+│   │   ├── auth_repository.py
+│   │   ├── user_repository.py
+│   │   ├── post_repository.py
+│   │   ├── comment_repository.py
+│   │   └── tag_repository.py
+│   │
+│   ├── schemas/            # Pydantic schemas for validation/response
+│       ├── auth_schema.py
+│       ├── user_schema.py
+│       ├── post_schema.py
+│       ├── comment_schema.py
+│       └── tag_schema.py
+│
+├── alembic/                # Database migrations
+├── scripts/
+│   └── seed.py             # Database seeding script
+│
+├── .env                    # Environment configuration
+├── .env.example
+├── alembic.ini
+├── main.py                 # FastAPI entry point
+└── requirements.txt        # Dependencies
+```
 
-1. **Clone the repo**
+---
 
-   ```
-        git clone https://github.com/IslamAhmd95/python-practice-projects.git
-        cd real-world-projects/4.sql_alchemy-blog
-    ```
+## 🚀 Getting Started
 
-2. **Create a virtual environment**
+### 1️⃣ **Clone the repository**
 
-    ```
-        python3 -m venv venv
-        source venv/bin/activate
-    ```
+```
+git clone https://github.com/IslamAhmd95/fastapi-blog
+cd fastapi-blog/
+```
 
+### 2️⃣ **Create and activate a virtual environment**
 
-3. **Install dependencies**
+```
+python3 -m venv venv
+source venv/bin/activate
+```
 
-    ```
-        pip install -r requirements.txt
-    ```
+### 3️⃣ **Install dependencies**
 
-4. **Run seed**
+```
+pip install -r requirements.txt
+```
 
-    ```
-        python -m scripts.seed
-    ```
+### 4️⃣ **Apply migrations**
 
-5. **Run the example demo**
+```
+alembic upgrade head
+```
 
-    ```
-        python main.py
-    ```
+### 5️⃣ **Seed the database**
 
+```
+python -m scripts.seed
+```
 
-You’ll see console output for all CRUD operations (create, read, update, delete) across users, posts, comments, tags, and likes.
+### 6️⃣ **Run the development server**
+
+```
+uvicorn main:app --reload
+```
+
+---

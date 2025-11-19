@@ -1,9 +1,7 @@
-from fastapi import FastAPI  # pyright: ignore[reportMissingImports]
-from app.api import auth
-from app.api import users
-from app.api import tags
-from app.api import posts
-from app.api import comments
+from fastapi import FastAPI
+from app.api import (
+    auth, users, tags, posts, comments
+)
 
 
 app = FastAPI(
