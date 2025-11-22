@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status  # pyright: ignore[reportMissingImports]
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -38,7 +38,7 @@ def create_tag(data: CreateTagSchema, db: Session = Depends(get_db)) -> AfterCre
 @router.get("/{tag_id}", response_model=ReadTagSchema, status_code=status.HTTP_200_OK)
 def get_tag(tag_id: int, db: Session = Depends(get_db)) -> ReadTagSchema:
     return tag_repository.get_by_id(db, tag_id)
-    
+
 
 @router.put('/{tag_id}', dependencies=[Depends(admin_required)], response_model=AfterUpdateTagSchema, status_code=status.HTTP_200_OK)
 def update_tag(tag_id: int, data: UpdateTagSchema, db: Session = Depends(get_db)) -> AfterUpdateTagSchema:

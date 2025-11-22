@@ -14,7 +14,7 @@ class Post(BaseModel):
     content: Mapped[str] = mapped_column(Text, nullable=False)
     author_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id", ondelete="CASCADE", onupdate="CASCADE"))
 
-    tags: Mapped[list["Tag"]] = relationship(  # pyright: ignore[reportUndefinedVariable]
+    tags: Mapped[list["Tag"]] = relationship(
         secondary="posts_tags", 
         back_populates="posts"
     )  

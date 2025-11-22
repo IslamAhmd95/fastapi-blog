@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, Form, HTTPException   # pyright: ignore[reportMissingImports]
+from fastapi import APIRouter, Depends, status, Form, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import EmailStr
 
